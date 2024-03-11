@@ -1,30 +1,43 @@
 import numpy as np
 import os
 import math
+from matplotlib.pyplot import imsave,show
 from skimage.io import imread
 import cv2
 import xml.etree.ElementTree as ET
+
 ROOT_PATH = "data"
 SCALE = 255
 
-def loadData(path,width,height,size):
-    data = np.zeros([height,width,size])
+def loadData(path,type,width,height,size):
 
+    data = np.zeros([height,width,size])
+    new_path = os.path.join(ROOT_PATH,type+"_fixedSize")
+    os.makedirs(new_path, exist_ok=True)
+    # print(new_path)
     for i in range(size):
-        img = imread(os.path.join(path,str(i)+'.png'),as_grey=True)
-        cur_height,cur_width = img.shape
-        if cur_height / cur_width > height / width:
-            new_width = cur_height * width / height
-            pad = (new_width - cur_width) / 2
-            img_padded= cv2.copyMakeBorder(img, 0, 0, math.ceil(pad),math.floor(pad), cv2.BORDER_CONSTANT, value=255)
-        elif cur_height / cur_width < height / width:
-            new_height = cur_width * height / width
-            pad = (new_height - cur_height) / 2
-            img_padded= cv2.copyMakeBorder(img, math.ceil(pad),math.floor(pad), 0, 0, cv2.BORDER_CONSTANT, value=255)
-    
-        img_rescaled = img_padded / SCALE # Rescale
-        img_resize = cv2.resize(img_rescaled, (width, height)) # Resize image
-        data[:,:,i] = img_resize
+        img = imread(os.path.join(path,str(i)+'.png'),as_gray=True)
+
+        img_resized = cv2.resize(img, (width, height))
+
+        original_height, original_width = img.shape
+        aspect_ratio = original_width / original_height
+        target_width = int(min(width, height * aspect_ratio))
+        target_height = int(min(height, width / aspect_ratio))
+
+        pad_width = max(0, width - target_width)
+        pad_height = max(0, height - target_height)
+
+        pad_top = pad_height // 2
+        pad_bottom = pad_height - pad_top
+        pad_left = pad_width // 2
+        pad_right = pad_width - pad_left
+
+        padded_img = cv2.copyMakeBorder(img, pad_top, pad_bottom, pad_left, pad_right, cv2.BORDER_CONSTANT, value=(0, 0, 0))
+        resized_img = cv2.resize(padded_img, (width, height), interpolation=cv2.INTER_LINEAR)
+        imsave(new_path + '\\'+str(i)+'.png',resized_img)
+        data[:,:,i] = resized_img
+
 
     return data
 
@@ -160,39 +173,39 @@ if __name__ == "__main__":
     # os.makedirs(test_path, exist_ok=True)
     # os.makedirs(val_path, exist_ok=True)
 
-    size = len(os.listdir(data_path))
-    count,train_count,val_count,test_count = 0,0,0,0
+    # size = len(os.listdir(data_path))
+    # count,train_count,val_count,test_count = 0,0,0,0
 
     # f1 = open(train_path + '/'+'label.txt', 'w')
     # f2 = open(val_path + '/'+'label.txt', 'w')
     # f3 = open(test_path + '/'+'label.txt', 'w')
 
     # # Split the data into training, validation set
-    for file in os.listdir(data_path):
+    # for file in os.listdir(data_path):
         # print(file)
-        if file.endswith('.inkml') :
+        # if file.endswith('.inkml') :
     #         label = extractLabel(os.path.join(data_path,file))
-            if count < size * 0.7:
+            # if count < size * 0.7:
     #             inkml2img(os.path.join(data_path,file), os.path.join(train_path,str(train_count)+'.png'))
     #             f1.write(label)
-                train_count += 1
-            elif count < size * 0.85:
+                # train_count += 1
+            # elif count < size * 0.85:
     #             inkml2img(os.path.join(data_path,file), os.path.join(val_path,str(val_count)+'.png'))
     #             f2.write(label)
-                val_count += 1
-            else:
+                # val_count += 1
+            # else:
     #             inkml2img(os.path.join(data_path,file), os.path.join(test_path,str(test_count)+'.png'))
     #             f3.write(label)
-                test_count += 1
-            count += 1
+                # test_count += 1
+            # count += 1
     # f1.close()
     # f2.close()
     # f3.close()
     
-    max_length,token_dict = getTokenDict()
-    tokenize(max_length,token_dict)
+    # max_length,token_dict = getTokenDict()
+    # tokenize(max_length,token_dict)
 
-
-    train_dataset  = loadData('data\\Training_small',300,100,train_count)
-    val_dataset  = loadData('data\\Validation_small',300,100,val_count)
-    test_dataset  = loadData('data\\Test_small',300,100,test_count)
+    train_size,val_size,test_size = getDatasetSizes()
+    # train_dataset  = loadData('data\\Training_small',"train",300,100,train_size)
+    val_dataset  = loadData('data\\Validation_small',"val",300,100,val_size)
+    test_dataset  = loadData('data\\Test_small',"test",300,100,test_size)
