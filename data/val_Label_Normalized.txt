@@ -1,0 +1,138 @@
+x _ { 1 } + x _ { 2 } = x _ { 3 }
+\sqrt { x - y - z + x ^ { 2 } + y ^ { 2 } + z ^ { 2 } }
+\frac { \operatorname { s i n } \theta + \operatorname { c o s } \theta + \operatorname { t a n } \theta } { x + y + z }
+\left( x ^ { 3 } - x ^ { 2 } - x \right) \left( 2 x - 7 \right)
+x _ { 1 } - x _ { 2 } + y _ { 1 } - y _ { 2 } + z _ { 1 } - z _ { 2 }
+a + b + c + d + e
+x ^ { i + 2 j \times k ^ { 3 } - 2 \frac { j } { i } }
+\operatorname { l o g } _ { 2 } 8 + \operatorname { l o g } _ { 3 } 9 + \operatorname { l o g } _ { 4 } 1 6
+\operatorname { s i n } x - \operatorname { s i n } y - \operatorname { s i n } \left( x - y \right)
+\frac { \operatorname { t a n } \alpha - \operatorname { t a n } \beta } { 1 + \operatorname { t a n } \alpha \operatorname { t a n } \beta }
+\frac { 2 \operatorname { t a n } \alpha } { 1 - \operatorname { t a n } ^ { 2 } \alpha }
+\operatorname* { l i m } _ { x \rightarrow - 1 } \frac { x ^ { 3 } + 1 } { x + 1 }
+1 + \frac { 1 } { 1 ! } + \frac { 1 } { 2 ! } + \frac { 1 } { 3 ! } + \frac { 1 } { 4 ! }
+\operatorname* { l i m } _ { x \rightarrow \frac { \pi } { 2 } + 0 } \operatorname { t a n } x = - \infty
+x _ { i } - x _ { i + 1 } + x _ { i + 2 }
+\int \left( 2 ^ { x } - 3 e ^ { x } \right) d x
+\frac { 1 } { a } F \left( a x + b \right) + C
+\frac { \operatorname { s i n } B + \operatorname { s i n } C } { \operatorname { c o s } B + \operatorname { c o s } C }
+\alpha _ { n + 1 } - 3 \beta = \frac { 3 } { 2 } \alpha _ { n } + \beta - 3 \beta
+3 0 \times 2 9 x ^ { 2 8 }
+\sqrt { b ^ { 2 } - 4 a c }
+\sqrt { 1 + \sqrt { 2 + \sqrt { 3 + \sqrt { 4 } } } }
+\operatorname* { l i m } _ { x \rightarrow \frac { 1 } { 4 } } \frac { 1 - 4 ^ { x - \frac { 1 } { 4 } } } { 1 - 4 x }
+x _ { 1 } + x _ { 2 } = x _ { 3 }
+\sqrt { x - y - z + x ^ { 2 } + y ^ { 2 } + z ^ { 2 } }
+\frac { \operatorname { s i n } \theta + \operatorname { c o s } \theta + \operatorname { t a n } \theta } { x + y + z }
+\left( x ^ { 3 } - x ^ { 2 } - x \right) \left( 2 x - 7 \right)
+x _ { 1 } - x _ { 2 } + y _ { 1 } - y _ { 2 } + z _ { 1 } - z _ { 2 }
+a + b + c + d + e
+x ^ { i + 2 j \times k ^ { 3 } - 2 \frac { j } { i } }
+\operatorname { l o g } _ { 2 } 8 + \operatorname { l o g } _ { 3 } 9 + \operatorname { l o g } _ { 4 } 1 6
+\operatorname { s i n } x - \operatorname { s i n } y - \operatorname { s i n } \left( x - y \right)
+\frac { \operatorname { t a n } \alpha - \operatorname { t a n } \beta } { 1 + \operatorname { t a n } \alpha \operatorname { t a n } \beta }
+\frac { 2 \operatorname { t a n } \alpha } { 1 - \operatorname { t a n } ^ { 2 } \alpha }
+\operatorname* { l i m } _ { x \rightarrow - 1 } \frac { x ^ { 3 } + 1 } { x + 1 }
+1 + \frac { 1 } { 1 ! } + \frac { 1 } { 2 ! } + \frac { 1 } { 3 ! } + \frac { 1 } { 4 ! }
+\operatorname* { l i m } _ { x \rightarrow \frac { \pi } { 2 } + 0 } \operatorname { t a n } x = - \infty
+x _ { i } - x _ { i + 1 } + x _ { i + 2 }
+\int \left( 2 ^ { x } - 3 e ^ { x } \right) d x
+\frac { 1 } { a } F \left( a x + b \right) + C
+\frac { \operatorname { s i n } B + \operatorname { s i n } C } { \operatorname { c o s } B + \operatorname { c o s } C }
+\alpha _ { n + 1 } - 3 \beta = \frac { 2 } { 3 } \alpha _ { n } + \beta - 3 \beta
+3 0 \times 2 9 x ^ { 2 8 }
+\sqrt { b ^ { 2 } - 4 a c }
+\sqrt { 1 + \sqrt { 2 + \sqrt { 3 + \sqrt { 4 } } } }
+\operatorname* { l i m } _ { x \rightarrow \frac { 1 } { 4 } } \frac { 1 - 4 ^ { x - \frac { 1 } { 4 } } } { 1 - 4 x }
+x _ { 1 } + x _ { 2 } = x _ { 3 }
+\sqrt { x - y - z + x ^ { 2 } + y ^ { 2 } + z ^ { 2 } }
+\frac { \operatorname { s i n } \theta + \operatorname { c o s } \theta + \operatorname { t a n } \theta } { x + y + z }
+\left( x ^ { 3 } - x ^ { 2 } - x \right) \left( 2 x - 7 \right)
+x _ { 1 } - x _ { 2 } + y _ { 1 } - y _ { 2 } + z _ { 1 } - z _ { 2 }
+a + b + c + d + e
+x ^ { i + 2 j \times k ^ { 3 } - 2 \frac { j } { i } }
+\operatorname { l o g } _ { 2 } 8 + \operatorname { l o g } _ { 3 } 9 + \operatorname { l o g } _ { 4 } 1 6
+\operatorname { s i n } x - \operatorname { s i n } y - \operatorname { s i n } \left( x - y \right)
+\frac { \operatorname { t a n } \alpha - \operatorname { t a n } \beta } { 1 + \operatorname { t a n } \alpha \operatorname { t a n } \beta }
+\frac { 2 \operatorname { t a n } \alpha } { 1 - \operatorname { t a n } ^ { 2 } \alpha }
+\operatorname* { l i m } _ { x \rightarrow - 1 } \frac { x ^ { 3 } + 1 } { x + 1 }
+1 + \frac { 1 } { 1 ! } + \frac { 1 } { 2 ! } + \frac { 1 } { 3 ! } + \frac { 1 } { 4 ! }
+\operatorname* { l i m } _ { x \rightarrow \frac { \pi } { 2 } + 0 } \operatorname { t a n } x = - \infty
+x _ { i } - x _ { i + 1 } + x _ { i + 2 }
+\int \left( 2 ^ { x } - 3 e ^ { x } \right) d x
+\frac { 1 } { a } F \left( a x + b \right) + C
+\frac { \operatorname { s i n } B + \operatorname { s i n } C } { \operatorname { c o s } B + \operatorname { c o s } C }
+\alpha _ { n + 1 } - 3 \beta = \frac { 2 } { 3 } \alpha _ { n } + \beta - 3 \beta
+3 0 \times 2 9 x ^ { 2 8 }
+\sqrt { b ^ { 2 } - 4 a c }
+\sqrt { 1 + \sqrt { 2 + \sqrt { 3 + \sqrt { 4 } } } }
+\operatorname* { l i m } _ { x \rightarrow \frac { 1 } { 4 } } \frac { 1 - 4 ^ { x - \frac { 1 } { 4 } } } { 1 - 4 x }
+x _ { 1 } + x _ { 2 } = x _ { 3 }
+\sqrt { x - y - z + x ^ { 2 } + y ^ { 2 } + z ^ { 2 } }
+\frac { \operatorname { s i n } \theta + \operatorname { c o s } \theta + \operatorname { t a n } \theta } { x + y + z }
+\left( x ^ { 3 } - x ^ { 2 } - x \right) \left( 2 x - 7 \right)
+x _ { 1 } - x _ { 2 } + y _ { 1 } - y _ { 2 } + z _ { 1 } - z _ { 2 }
+a + b + c + d + e
+x ^ { i + 2 j \times k ^ { 3 } - 2 \frac { j } { i } }
+\operatorname { l o g } _ { 2 } 8 + \operatorname { l o g } _ { 3 } 9 + \operatorname { l o g } _ { 4 } 1 6
+\operatorname { s i n } x - \operatorname { s i n } y - \operatorname { s i n } \left( x - y \right)
+\frac { \operatorname { t a n } \alpha - \operatorname { t a n } \beta } { 1 + \operatorname { t a n } \alpha \operatorname { t a n } \beta }
+\frac { 2 \operatorname { t a n } \alpha } { 1 - \operatorname { t a n } ^ { 2 } \alpha }
+\operatorname* { l i m } _ { x \rightarrow - 1 } \frac { x ^ { 3 } + 1 } { x + 1 }
+1 + \frac { 1 } { 1 ! } + \frac { 1 } { 2 ! } + \frac { 1 } { 3 ! } + \frac { 1 } { 4 ! }
+\operatorname* { l i m } _ { x \rightarrow \frac { \pi } { 2 } + 0 } \operatorname { t a n } x = - \infty
+x _ { i } - x _ { i + 1 } + x _ { i + 2 }
+\int \left( 2 ^ { x } - 3 e ^ { x } \right) d x
+\frac { 1 } { a } F \left( a x + b \right) + C
+\frac { \operatorname { s i n } B + \operatorname { s i n } C } { \operatorname { c o s } B + \operatorname { c o s } C }
+\alpha _ { n + 1 } - 3 \beta = \frac { 2 } { 3 } a _ { n } + \beta - 3 \beta
+3 0 \times 2 9 x ^ { 2 8 }
+\sqrt { b ^ { 2 } - 4 a c }
+\sqrt { 1 + \sqrt { 2 + \sqrt { 3 + \sqrt { 4 } } } }
+\operatorname* { l i m } _ { x \rightarrow \frac { 1 } { 4 } } \frac { 1 - 4 ^ { x - \frac { 1 } { 4 } } } { 1 - 4 x }
+x _ { 1 } + x _ { 2 } = x _ { 3 }
+\sqrt { x - y - z + x ^ { 2 } + y ^ { 2 } + z ^ { 2 } }
+\frac { \operatorname { s i n } \theta + \operatorname { c o s } \theta + \operatorname { t a n } \theta } { x + y + z }
+\left( x ^ { 3 } - x ^ { 2 } - x \right) \left( 2 x - 7 \right)
+x _ { 1 } - x _ { 2 } + y _ { 1 } - y _ { 2 } + z _ { 1 } - z _ { 2 }
+a + b + c + d + e
+x ^ { i + 2 j \times k ^ { 3 } - 2 \frac { j } { i } }
+\operatorname { l o g } _ { 2 } 8 + \operatorname { l o g } _ { 3 } 9 + \operatorname { l o g } _ { 4 } 1 6
+\operatorname { s i n } x - \operatorname { s i n } y - \operatorname { s i n } \left( x - y \right)
+\frac { \operatorname { t a n } \alpha - \operatorname { t a n } \beta } { 1 + \operatorname { t a n } \alpha \operatorname { t a n } \beta }
+\frac { 2 \operatorname { t a n } \alpha } { 1 - \operatorname { t a n } ^ { 2 } \alpha }
+\operatorname* { l i m } _ { x \rightarrow - 1 } \frac { x ^ { 3 } + 1 } { x + 1 }
+1 + \frac { 1 } { 1 ! } + \frac { 1 } { 2 ! } + \frac { 1 } { 3 ! } + \frac { 1 } { 4 ! }
+\operatorname* { l i m } _ { x \rightarrow \frac { \pi } { 2 } + 0 } \operatorname { t a n } x = - \infty
+x _ { i } - x _ { i + 1 } + x _ { i + 2 }
+\int \left( 2 ^ { x } - 3 e ^ { x } \right) d x
+\frac { 1 } { a } F \left( a x + b \right) + C
+\frac { \operatorname { s i n } B + \operatorname { s i n } C } { \operatorname { c o s } B + \operatorname { c o s } C }
+\alpha _ { n + 1 } - 3 \beta = \frac { 2 } { 3 } \alpha _ { n } + \beta - 3 \beta
+3 0 \times 2 9 x ^ { 2 8 }
+\sqrt { b ^ { 2 } - 4 a c }
+\sqrt { 1 + \sqrt { 2 + \sqrt { 3 + \sqrt { 4 } } } }
+\operatorname* { l i m } _ { x \rightarrow \frac { 1 } { 4 } } \frac { 1 - 4 ^ { x - \frac { 1 } { 4 } } } { 1 - 4 x }
+x _ { 1 } + x _ { 2 } = x _ { 3 }
+\sqrt { x - y - z + x ^ { 2 } + y ^ { 2 } + z ^ { 2 } }
+\frac { \operatorname { s i n } \theta + \operatorname { c o s } \theta + \operatorname { t a n } \theta } { x + y + z }
+\left( x ^ { 3 } - x ^ { 2 } - x \right) \left( 2 x - 7 \right)
+x _ { 1 } - x _ { 2 } + y _ { 1 } - y _ { 2 } + z _ { 1 } - z _ { 2 }
+a + b + c + d + e
+x ^ { i + 2 j \times k ^ { 3 } - 2 \frac { j } { i } }
+\operatorname { l o g } _ { 2 } 8 + \operatorname { l o g } _ { 3 } 9 + \operatorname { l o g } _ { 4 } 1 6
+\operatorname { s i n } x - \operatorname { s i n } y - \operatorname { s i n } \left( x - y \right)
+\frac { \operatorname { t a n } \alpha - \operatorname { t a n } \beta } { 1 + \operatorname { t a n } \alpha \operatorname { t a n } \beta }
+\frac { 2 \operatorname { t a n } \alpha } { 1 - \operatorname { t a n } ^ { 2 } \alpha }
+\operatorname* { l i m } _ { x \rightarrow - 1 } \frac { x ^ { 3 } + 1 } { x + 1 }
+1 + \frac { 1 } { 1 ! } + \frac { 1 } { 2 ! } + \frac { 1 } { 3 ! } + \frac { 1 } { 4 ! }
+\operatorname* { l i m } _ { x \rightarrow \frac { \pi } { 2 } + 0 } \operatorname { t a n } x = - \infty
+x _ { i } - x _ { i + 1 } + x _ { i + 2 }
+\int \left( 2 ^ { x } - 3 e ^ { x } \right) d x
+\frac { 1 } { a } F \left( a x + b \right) + C
+\frac { \operatorname { s i n } B + \operatorname { s i n } C } { \operatorname { c o s } B + \operatorname { c o s } C }
+\alpha _ { n + 1 } - 3 \beta = \frac { 2 } { 3 } \alpha _ { n } + \beta - 3 \beta
+3 0 \times 2 9 x ^ { 2 8 }
+\sqrt { b ^ { 2 } - 4 a c }
+\sqrt { 1 + \sqrt { 2 + \sqrt { 3 + \sqrt { 4 } } } }
+\operatorname* { l i m } _ { x \rightarrow \frac { 1 } { 4 } } \frac { 1 - 4 ^ { x - \frac { 1 } { 4 } } } { 1 - 4 x }
