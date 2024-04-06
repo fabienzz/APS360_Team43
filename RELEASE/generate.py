@@ -8,6 +8,7 @@ import subprocess
 import fitz
 from PIL import Image
 import re
+import os
 
 
 class TextGenerator(nn.Module):
@@ -37,21 +38,28 @@ class TextGenerator(nn.Module):
         output = self.decoder(output)          # predict distribution over next tokens
         return output, hidden
     
-def sample_sequence(model, start_text ,max_len=20, temperature=0.8):
+
+def min_max_sequence(model, start_text ,min_len=5,max_len=20, temperature=0.8,must_contain = ""):
     generated_sequence = ""
     inp = [vocab_stoi["<BOS>"]]
     idx,prefix_length,prefix_lst = -1,-1,[]
+
 
     if start_text != "":
       idx = 0
       prefix_lst = start_text.split(" ")
       prefix_length = len(prefix_lst)
-      generated_sequence = prefix_lst[idx] + ' '
-      inp = [vocab_stoi[idx]]
-      idx += 1
-
-    inp = torch.Tensor(inp).long().cuda()
+      # generated_sequence = prefix_lst[idx] + ' '
+      # inp = [vocab_stoi[idx]]
+      # idx += 1
+    if prefix_length > max_len:
+      print("Long user input!")
+      return
+    inp = torch.Tensor(inp).long()
     hidden = None
+
+
+
     for p in range(max_len):
         output, hidden = model(inp.unsqueeze(0), hidden)
 
@@ -59,83 +67,8 @@ def sample_sequence(model, start_text ,max_len=20, temperature=0.8):
           predicted_char = prefix_lst[idx]
           idx += 1
           inp = torch.Tensor([vocab_stoi[predicted_char]]).long()
-        else:
-          predicted_char = "<pad>"
-          while predicted_char in ["<pad>","<BOS>","<unk>"]:
-            # Sample from the network as a multinomial distribution
-            output_dist = output.data.view(-1).div(temperature).exp()
-            top_i = int(torch.multinomial(output_dist, 1)[0])
-            # Add predicted character to string and use as next input
-            predicted_char = vocab_itos[top_i]
-
-            inp = torch.Tensor([top_i]).long()
-
-        if predicted_char == "<EOS>":
-          break
-
-        generated_sequence += predicted_char + ' '
-
-    return generated_sequence
-
-def best_match_sequence(model, start_text ,max_len=20):
-  generated_sequence = ""
-  inp = [vocab_stoi["<BOS>"]]
-  idx,prefix_length,prefix_lst = -1,-1,[]
-
-  if start_text != "":
-    idx = 0
-    prefix_lst = start_text.split(" ")
-    prefix_length = len(prefix_lst)
-    generated_sequence = prefix_lst[idx] + ' '
-    inp = [vocab_stoi[idx]]
-    idx += 1
-
-  inp = torch.Tensor(inp).long()
-  hidden = None
-  for p in range(max_len):
-      output, hidden = model(inp.unsqueeze(0), hidden)
-
-      if idx < prefix_length:
-        predicted_char = prefix_lst[idx]
-        idx += 1
-        inp = torch.Tensor([vocab_stoi[predicted_char]]).long()
-      else:
-        # always choose the token with the largest probability
-        _,top_i = output.topk(1)
-        # Add predicted character to string and use as next input
-        predicted_char = vocab_itos[top_i.item()]
-        inp = torch.Tensor([top_i]).long()
-
-      if predicted_char == "<EOS>":
-        break
-
-      generated_sequence += predicted_char + ' '
-
-  return generated_sequence
-
-def min_max_sequence(model, start_text, min_len=5, max_len=20, temperature=0.8):
-    generated_sequence = ""
-    inp = [vocab_stoi["<BOS>"]]
-    idx,prefix_length,prefix_lst = -1,-1,[]
-
-    if start_text != "":
-      idx = 0
-      prefix_lst = start_text.split(" ")
-      prefix_length = len(prefix_lst)
-      generated_sequence = prefix_lst[idx] + ' '
-      inp = [vocab_stoi[idx]]
-      idx += 1
-    if prefix_length > max_len:
-      print("Long user input!")
-      return
-    inp = torch.Tensor(inp).long()
-    hidden = None
-    for p in range(max_len):
-        output, hidden = model(inp.unsqueeze(0), hidden)
-
-        if idx < prefix_length:
-          predicted_char = prefix_lst[idx]
-          idx += 1
+        elif p == min_len and must_contain != "":
+          predicted_char = must_contain
           inp = torch.Tensor([vocab_stoi[predicted_char]]).long()
         else:
           predicted_char = "<pad>"
@@ -156,44 +89,38 @@ def min_max_sequence(model, start_text, min_len=5, max_len=20, temperature=0.8):
 
     return generated_sequence
 
-# Keep generating until one valid LaTeX expression is found
-def generate_valid_sequence(model, start_text, max_len=20, temperature = 0.8):
-    found = False
-    generated_sequence = ""
-    start_time,now = time.time(),time.time()
-    while not found and now - start_time < 10  :
-      if now - start_time > 10:
-        return generated_sequence + "\nTIME OUT"
-      generated_sequence = min_max_sequence(model,start_text,max_len,temperature)
-      if check_latex_syntax(generated_sequence):
-        found = True
-      else:
-        print(generated_sequence + " is not valid!")
-      now = time.time()
-
-    print("It takes {:.2f} to generate a valid latex expression".format(now - start_time))
-    return generated_sequence
 
 def check_latex_syntax(latex_expression):
-  temp_tex_file = "temp.tex"
-  with open(temp_tex_file,'w') as f:
-    f.write(r'''
+  
+    curr_dir = os.getcwd()
+    temp_dir = os.path.join(curr_dir, 'temp')
+    os.chdir(temp_dir)
+
+    temp_tex_file = "temp.tex"
+    with open(temp_tex_file,'w') as f:
+        f.write(r'''
 \documentclass{article}
 \begin{document}
 $''')
-    f.write(latex_expression)
-    f.write(r'''$
+        f.write(latex_expression)
+        f.write(r'''$
 \end{document}''')
-  try:
-    subprocess.check_call(['pdflatex', '-interaction=nonstopmode', temp_tex_file])
-  except:
-    return False
+    try:
+        subprocess.check_call(['pdflatex', '-interaction=nonstopmode', temp_tex_file])
+    except:
+        os.chdir(curr_dir)
+        return False
 
-  subprocess.run(['rm', 'temp.tex', 'temp.log', 'temp.aux',"temp.pdf"])
-  return True
+    os.chdir(curr_dir)
+    return True
 
 
 def latex2img(latex_expression, file_name):
+
+    curr_dir = os.getcwd()
+    temp_dir = os.path.join(curr_dir, 'temp')
+    os.chdir(temp_dir)
+
     temp_tex_file = "temp.tex"
     with open(temp_tex_file, 'w') as f:
         f.write(r'''
@@ -213,13 +140,13 @@ $''')
       pdf_doc = fitz.open("temp.pdf")  # Open temporary pdf with PyMuPDF
       page = pdf_doc[0]  # Assuming the first page contains the Latex expression
       pix = page.get_pixmap(matrix=fitz.Matrix(5.0, 5.0))  # Render at 5x resolution for better quality
+      os.chdir(curr_dir)
       pix.save(file_name)  # Save the rendered image
       pdf_doc.close()
     except Exception as e:
       print(f"Error converting pdf to image: {e}")
+      os.chdir(curr_dir)
       return False
-    finally:
-      subprocess.run(['rm', 'temp.tex', 'temp.log', 'temp.aux'])  # Cleanup temporary files
     return True
 
 def crop_image(path, i):
@@ -242,21 +169,48 @@ def check_vocab(input_string):
             return False
     return True
 
+curr_dir = os.getcwd()
+vocab_path = os.path.join(curr_dir, 'src', 'vocab.pkl')
 
-with open('vocab.pkl', 'rb') as f:
+with open(vocab_path, 'rb') as f:
     loaded_vocab = pickle.load(f)
     vocab_stoi = loaded_vocab['stoi']
     vocab_itos = loaded_vocab['itos']
     vocab_size = loaded_vocab['size']
 
 model = TextGenerator(vocab_size, 256)
-model_path = r"/Users/brett/Downloads/4.05_UI_Brett/GRU_2024-04-04-16_22_bs10_lr0.001_epoch5.zip"
+model_path = os.path.join(curr_dir, 'src', r'GRU_2024-04-04-16_22_bs10_lr0.001_epoch5.zip')
 state = torch.load(model_path)
 model.load_state_dict(state)
 
-def generate(start, min_length=5, max_length=20, required_char=''):
 
-    #return [('z =  ( n + { 0 } ) ', 'img/0.png'), ('z =  + { i } = \\frac { n } { 2 } _ 1 ', 'img/1.png'), ('z =  7 3 _ 2 ', 'img/2.png'), ('z =  ( t ) = 7 ', 'img/3.png'), ('z =  p ^ { 2 } ', 'img/4.png')]
+def smart_generator(model, start_text, min_len=5, max_len=20, 
+                    temperature=0.8, num_of_img=5, must_contain = ""):
+    ret =[]
+    diff = max_len - min_len
+    len_lwm,len_upm = min_len,min_len
+    ranges = diff / num_of_img
+    for i in range(num_of_img):
+      len_upm += ranges
+      found,force = False, False
+      start_time,now = time.time(),time.time()
+      while not found:
+        seq = min_max_sequence(model, start_text, int(len_lwm), int(len_upm), 
+                               temperature,must_contain)
+        if not force and now - start_time > 1:
+          start_text += ' '+ must_contain
+          must_contain = ""
+          force = True
+        if check_latex_syntax(seq):
+          found = True
+      now = time.time()
+      print(now - start_time)
+      ret.append(seq)
+      len_lwm += ranges
+    return ret
+
+
+def generate(start, min_length=5, max_length=20, required_char=''):
 
     output = [(None, None), 
               (None, None), 
@@ -264,12 +218,14 @@ def generate(start, min_length=5, max_length=20, required_char=''):
               (None, None), 
               (None, None)]
     
+    temps = []
+    temps = smart_generator(model, start, min_length, max_length, 0.8, 5, required_char)
+
+    
     for i in range (5):
-        temp = min_max_sequence(model, start, min_length, max_length)
-        while not check_latex_syntax(temp):
-            temp = min_max_sequence(model, start, min_length, max_length)
-        latex2img(temp, 'img/'+str(i)+'_raw.png')
+
+        latex2img(temps[i], 'img/'+str(i)+'_raw.png')
         crop_image('img/', i)
-        output[i] = (temp, 'img/'+str(i)+'.png')
+        output[i] = (temps[i], 'img/'+str(i)+'.png')
 
     return output

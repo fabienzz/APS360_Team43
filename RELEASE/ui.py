@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import scrolledtext, messagebox
 from PIL import Image, ImageTk
-import latex_model
+import generate
 import pyperclip
 
 class LatexUI:
@@ -69,11 +69,11 @@ class LatexUI:
         required_char = self.required_char_entry.get().strip()
 
         # Check if input or required character contains invalid syntax
-        if not latex_model.check_vocab(input_latex):
+        if not generate.check_vocab(input_latex):
             messagebox.showerror("Error", "Input string contains invalid syntax.")
             return
         
-        if not latex_model.check_vocab(required_char):
+        if not generate.check_vocab(required_char):
             messagebox.showerror("Error", "Required character contains invalid syntax.")
             return
 
@@ -85,7 +85,7 @@ class LatexUI:
 
         try:
             print(input_latex, min_length, max_length, required_char)
-            outputs = latex_model.generate(input_latex, min_length, max_length, required_char)
+            outputs = generate.generate(input_latex, min_length, max_length, required_char)
             if len(outputs) != 5:
                 raise ValueError("Model did not return 5 outputs.")
 
