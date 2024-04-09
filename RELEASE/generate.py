@@ -12,10 +12,13 @@ import os
 
 
 class TextGenerator(nn.Module):
+
     def __init__(self, vocab_size, hidden_size, n_layers=1, time=True):
+
         super(TextGenerator, self).__init__()
         self.name = 'GRU'
 
+        # add timesteamp to model name
         if time:
           timezone = pytz.timezone('America/Toronto')
           current_datetime = datetime.datetime.now(timezone)
@@ -33,9 +36,14 @@ class TextGenerator(nn.Module):
         self.decoder = nn.Linear(hidden_size, vocab_size)
 
     def forward(self, inp, hidden=None):
-        inp = self.ident[inp]                  # generate one-hot vectors of input
-        output, hidden = self.rnn(inp, hidden) # get the next output and hidden state
-        output = self.decoder(output)          # predict distribution over next tokens
+
+        # generate one-hot vectors of input
+        inp = self.ident[inp]
+        # get the next output and hidden state
+        output, hidden = self.rnn(inp, hidden)
+        # predict distribution over next tokens
+        output = self.decoder(output)
+        
         return output, hidden
     
 
@@ -139,7 +147,7 @@ $''')
     try:
       pdf_doc = fitz.open("temp.pdf")  # Open temporary pdf with PyMuPDF
       page = pdf_doc[0]  # Assuming the first page contains the Latex expression
-      pix = page.get_pixmap(matrix=fitz.Matrix(5.0, 5.0))  # Render at 5x resolution for better quality
+      pix = page.get_pixmap(matrix=fitz.Matrix(10.0, 10.0))  # Render at 5x resolution for better quality
       os.chdir(curr_dir)
       pix.save(file_name)  # Save the rendered image
       pdf_doc.close()
@@ -151,7 +159,7 @@ $''')
 
 def crop_image(path, i):
     img = Image.open(path + str(i) + '_raw.png')
-    left, top, right, bottom = 700, 500, 1500, 800
+    left, top, right, bottom = 1400, 1150, 2700, 1470
     cropped_img = img.crop((left, top, right, bottom))
     cropped_img.save(path + str(i) + '.png')
 
@@ -169,19 +177,7 @@ def check_vocab(input_string):
             return False
     return True
 
-curr_dir = os.getcwd()
-vocab_path = os.path.join(curr_dir, 'src', 'vocab.pkl')
 
-with open(vocab_path, 'rb') as f:
-    loaded_vocab = pickle.load(f)
-    vocab_stoi = loaded_vocab['stoi']
-    vocab_itos = loaded_vocab['itos']
-    vocab_size = loaded_vocab['size']
-
-model = TextGenerator(vocab_size, 256)
-model_path = os.path.join(curr_dir, 'src', r'GRU_2024-04-04-16_22_bs10_lr0.001_epoch5.zip')
-state = torch.load(model_path)
-model.load_state_dict(state)
 
 
 def smart_generator(model, start_text, min_len=5, max_len=20, 
@@ -221,11 +217,24 @@ def generate(start, min_length=5, max_length=20, required_char=''):
     temps = []
     temps = smart_generator(model, start, min_length, max_length, 0.8, 5, required_char)
 
-    
     for i in range (5):
-
         latex2img(temps[i], 'img/'+str(i)+'_raw.png')
         crop_image('img/', i)
         output[i] = (temps[i], 'img/'+str(i)+'.png')
 
     return output
+
+
+curr_dir = os.getcwd()
+vocab_path = os.path.join(curr_dir, 'src', 'vocab.pkl')
+
+with open(vocab_path, 'rb') as f:
+    loaded_vocab = pickle.load(f)
+    vocab_stoi = loaded_vocab['stoi']
+    vocab_itos = loaded_vocab['itos']
+    vocab_size = loaded_vocab['size']
+
+model = TextGenerator(vocab_size, 512)
+model_path = os.path.join(curr_dir, 'src', r'GRU_2024-04-06-23_08_bs10_lr0.0003_epoch10.zip')
+state = torch.load(model_path)
+model.load_state_dict(state)
